@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/mansu/CLionProjects/Square/main.cpp
+iostream
+-
+math.h
+/cygdrive/c/Users/mansu/CLionProjects/Square/math.h
+
