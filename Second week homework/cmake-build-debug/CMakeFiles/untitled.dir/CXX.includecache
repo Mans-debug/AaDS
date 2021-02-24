@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/mansu/CLionProjects/Second week homework/main.cpp
+iostream
+-
+cstdlib
+/cygdrive/c/Users/mansu/CLionProjects/Second week homework/cstdlib
+
