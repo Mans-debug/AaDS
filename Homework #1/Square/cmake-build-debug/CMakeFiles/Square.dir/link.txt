@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/Square.dir/main.cpp.o  -o Square.exe -Wl,--out-implib,libSquare.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
