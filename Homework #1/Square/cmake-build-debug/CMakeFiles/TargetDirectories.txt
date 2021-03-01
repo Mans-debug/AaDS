@@ -1,3 +1,3 @@
-/cygdrive/c/Users/mansu/CLionProjects/Square/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/cygdrive/c/Users/mansu/CLionProjects/Square/cmake-build-debug/CMakeFiles/edit_cache.dir
-/cygdrive/c/Users/mansu/CLionProjects/Square/cmake-build-debug/CMakeFiles/Square.dir
+/cygdrive/c/Users/mansu/CLionProjects/AaDS/Homework #1/Square/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/c/Users/mansu/CLionProjects/AaDS/Homework #1/Square/cmake-build-debug/CMakeFiles/edit_cache.dir
+/cygdrive/c/Users/mansu/CLionProjects/AaDS/Homework #1/Square/cmake-build-debug/CMakeFiles/Square.dir

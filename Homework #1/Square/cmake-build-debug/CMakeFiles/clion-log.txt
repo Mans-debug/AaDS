@@ -1,4 +1,4 @@
-C:\Users\mansu\AppData\Local\JetBrains\CLion2020.3\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/mansu/CLionProjects/Square
+C:\Users\mansu\AppData\Local\JetBrains\CLion2020.3\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/cygdrive/c/Users/mansu/CLionProjects/AaDS/Homework #1/Square"
 -- The C compiler identification is GNU 10.2.0
 -- The CXX compiler identification is GNU 10.2.0
 -- Check for working C compiler: /usr/bin/cc
@@ -15,4 +15,4 @@ C:\Users\mansu\AppData\Local\JetBrains\CLion2020.3\cygwin_cmake\bin\cmake.exe -D
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /cygdrive/c/Users/mansu/CLionProjects/Square/cmake-build-debug
+-- Build files have been written to: /cygdrive/c/Users/mansu/CLionProjects/AaDS/Homework #1/Square/cmake-build-debug

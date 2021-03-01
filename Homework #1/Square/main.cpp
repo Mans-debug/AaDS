@@ -3,38 +3,27 @@
 
 using namespace std;
 
-
-double *squareOfArr(double arr[])
+void solve(double *arr)
 {
-    static double sq[3];
-    for (int i = 0; i < 3; ++i)
+    double D = -1;
+    D = pow(arr[1], 2) - 4 * arr[0] * arr[2];
+    if (D < 0)
+        return ;
+    else
     {
-        if (arr[i] >= 0)
-            sq[i] = sqrt(arr[i]);
-        else
-            sq[i] = arr[i];
-    }
-    return sq;
-}
+        double x1 = (-arr[1] + sqrt(D)) / 2 / arr[0];
+        double x2 = (-arr[1] + sqrt(D)) / 2 / arr[0];
 
-void printArr(double arr[])
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        if (arr[i] >= 0)
-            cout << arr[i] << endl;
-        else
-            cout << "There is no square root for " << arr[i]<<endl;
+        cout<<x1<<" "<<x2;
     }
 }
-
 int main()
 {
-    double arr[3];
-    for (int i = 0; i < 3; ++i)
-    {
-        cin >> arr[i];
-    }
-    printArr(squareOfArr(arr));
-    return 0;
+double arr[3];
+for (int i = 0;i < 3; ++i)
+{
+cin >> arr[i];
+}
+solve(arr);
+return 0;
 }
