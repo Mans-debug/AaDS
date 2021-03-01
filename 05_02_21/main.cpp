@@ -1,5 +1,7 @@
 #include <iostream>
 using namespace std;
+//Чет не так робит, когда создаю сразу Stack and LinkedList вместе,
+//все норм когда один не мешает другому
 
 struct Node
 {
@@ -59,9 +61,9 @@ struct LinkedList
         } else
         {
             Node *temp = pHead;
-            while (temp->next != nullptr)
+            while (pHead->next != nullptr)
             {
-                temp = temp->next;
+                pHead = pHead->next;
             }
             Node *node = new Node();
             node->value = i;
@@ -106,13 +108,13 @@ struct LinkedList
 };
 int main()
 {
-    Stack stack;
+    /*Stack stack;
     stack.push(324);
     stack.push(76);
     stack.push(123);
     stack.push(124567);
     stack.push(873);
-    stack.printAll();
+    stack.printAll();*/
 
 
 
@@ -126,6 +128,6 @@ int main()
     cout<<list.size()<<endl;
     list.printAll();
 
-    cout<<list.get(2)<<endl;
+    cout<<"The second element is "<<list.get(2)<<endl;
     return 0;
 }
