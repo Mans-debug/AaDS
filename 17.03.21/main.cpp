@@ -189,50 +189,56 @@ struct SortedList
         }
     }
 
-    void Union(SortedList *a, SortedList *b)
+    static SortedList Intersect(SortedList *a, SortedList *b)
     {
-        for (int i = 0; i < a->size() + b->size(); ++i)
-        {
-            if (i < a->size())
-            {
-                addUnique(a->get(i));
-            } else
-            {
-                addUnique(b->get(i-a->size()));
-            }
-        }
-    }
-
-    void Intersect(SortedList *a, SortedList *b)
-    {
+        SortedList list;
         for (int i = 0; i < a->size(); ++i)
         {
             for (int j = 0; j < b->size(); ++j)
             {
-                if(a->get(i)==b->get(j))
+                if (a->get(i) == b->get(j))
                 {
-                    addUnique(a->get(i));
+                    list.addUnique(a->get(i));
                 }
             }
         }
+        return list;
     }
 
-    void Difference(SortedList *a, SortedList *b)
+    static SortedList Difference(SortedList *a, SortedList *b)
     {
+        SortedList list;
         for (int i = 0; i < a->size(); ++i)
         {
             bool flag = true;
             for (int j = 0; j < b->size(); ++j)
             {
-                if(a->get(i)==b->get(j))
+                if (a->get(i) == b->get(j))
                 {
                     flag = false;
                 }
             }
-            if(flag)
-                add(a->get(i));
+            if (flag)
+                list.add(a->get(i));
             flag = true;
         }
+        return list;
+    }
+
+    static SortedList Union(SortedList *a, SortedList *b)
+    {
+        SortedList list;
+        for (int i = 0; i < a->size() + b->size(); ++i)
+        {
+            if (i < a->size())
+            {
+                list.addUnique(a->get(i));
+            } else
+            {
+                list.addUnique(b->get(i - a->size()));
+            }
+        }
+        return list;
     }
 
 };
@@ -240,7 +246,6 @@ struct SortedList
 int main()
 {
     int rand();
-    SortedList* list = new SortedList;
     SortedList *list1 = new SortedList;
     SortedList *list2 = new SortedList;
 
@@ -249,20 +254,18 @@ int main()
     list.addUnique(2);
     list.addUnique(4);
     list.printAll();*/
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < 5; ++i)
     {
-        int temp = rand()%20;
-        list1->addUnique(temp);
+        int temp = rand() % 100000;
+        list1->add(temp);
     }
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < 5; ++i)
     {
-        int temp = rand()%20;
-        list2->addUnique(temp);
+        int temp = rand() % 100000;
+        list2->add(temp);
     }
 
-    list->Difference(list1,list2);
-    list->printAll();
-    cout<<"size "<<list->size();
+    SortedList::Union(list1, list2).printAll();
 
     return 0;
 }
