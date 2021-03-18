@@ -10,10 +10,10 @@ struct MaxHeap
     int maxSize = 0;
 
 
-    void createNewArr(int size)
+    void createNewArr(int maxSize)
     {
-        int *res = new int[size];
-        if (size > 1)
+        int *res = new int[maxSize];
+        if (maxSize > 1)
         {
             for (int i = 0; i < this->size; ++i)
             {
@@ -23,7 +23,7 @@ struct MaxHeap
         }
 
         delete[] array;
-        array = res;//как удалить предыдущий массив?
+        array = res;
     }
 
     int parent(int i)
@@ -86,11 +86,6 @@ struct MaxHeap
 
     int extractMax()
     {
-        /*for (int i = 0; i < size; ++i)
-         {
-            int x = array[i];
-             cout<<x<<" ";
-         }*/
         int res = array[0];
         array[0] = array[size - 1];
         size--;
