@@ -1,22 +1,28 @@
 //MAX HEAP
 #include <iostream>
-
+#include "math.h"
 using namespace std;
 
 struct MaxHeap
 {
-    int *array;
+    int *array = 0;
     int size = 0;
     int maxSize = 0;
 
 
-    void createNewArr()
+    void createNewArr(int size)
     {
-        int res[maxSize];
-        for (int i = 0; i < size; ++i)
+        int *res = new int[size];
+        if (size > 1)
         {
-            res[i] = array[0];
+            for (int i = 0; i < this->size; ++i)
+            {
+                int x = array[i];
+                res[i] = array[i];
+            }
         }
+
+        delete[] array;
         array = res;//как удалить предыдущий массив?
     }
 
@@ -37,11 +43,11 @@ struct MaxHeap
 
     void siftUp(int i)
     {
-        while ((i > 1) && (array[i] > array[parent(i)]))
+        while ((i > 0) && (array[i] > array[parent(i)]))
         {
             int temp = array[i];
             array[i] = array[parent(i)];
-            array[i] = temp;
+            array[parent(i)] = temp;
             i = parent(i);
         }
     }
@@ -49,22 +55,17 @@ struct MaxHeap
     void siftDown(int i)
     {
         int maxIndex = i;
-        while (i < size - 2)
+
+        if (leftChild(i) < size && array[leftChild(i)] > array[i])
+            maxIndex = leftChild(i);
+        if (rightChild(i) < size && array[rightChild(i)] > array[maxIndex])
+            maxIndex = rightChild(i);
+        if (maxIndex != i)
         {
-            if ((array[i] > rightChild(i)) && (array[i] > leftChild(i)))
-            {
-                return;
-            } else
-            {
-                if (rightChild(i) > leftChild(i))
-                    maxIndex = rightChild(i);
-                else
-                    maxIndex = leftChild(i);
-            }
             int temp = array[i];
             array[i] = array[maxIndex];
             array[maxIndex] = temp;
-            i = maxIndex;
+            siftDown(maxIndex);
         }
     }
 
@@ -73,13 +74,10 @@ struct MaxHeap
         if (size < maxSize)
         {
             size++;
-        }
-        else
+        } else
         {
-            if(maxSize == 0)
-                maxSize++;
-            maxSize *= 2;
-            createNewArr();
+            maxSize = maxSize * 2 + 1;
+            createNewArr(maxSize);
             size++;
         }
         array[size - 1] = value;
@@ -88,15 +86,14 @@ struct MaxHeap
 
     int extractMax()
     {
+        /*for (int i = 0; i < size; ++i)
+         {
+            int x = array[i];
+             cout<<x<<" ";
+         }*/
         int res = array[0];
         array[0] = array[size - 1];
-        array[size - 1] = res;
-        if (size - 1 <= maxSize / 2)
-        {
-            maxSize /= 2;
-            size--;
-        } else
-            size--;
+        size--;
         siftDown(0);
         return res;
     }
@@ -104,6 +101,22 @@ struct MaxHeap
     int getMax()
     {
         return array[0];
+    }
+
+    static int *sort(int *array, int size)
+    {
+        MaxHeap heap;
+        for (int i = 0; i < size; ++i)
+        {
+            heap.insert(array[i]);
+        }
+        int *res = new int[size];
+        for (int i = size - 1; i > -1; --i)
+        {
+            res[i] = heap.extractMax();
+        }
+        delete [] array;
+        return res;
     }
 
 };
@@ -120,6 +133,19 @@ int *randArr(int size, int limit)
 
 int main()
 {
+    MaxHeap heap;
+    int size = 21;
+    int *array = new int[size];
+    for (int i = 0; i < size; ++i)
+    {
+        array[i] = random()%1000;
+    }
+    array = MaxHeap::sort(array, size);
+    for (int i = 0; i < size; ++i)
+    {
+        cout<<array[i]<<' ';
+    }
+
 
     return 0;
 }
