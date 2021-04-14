@@ -1,5 +1,13 @@
 #include <iostream>
+#include <vector>
+#include "fstream"
+#include "ctime"
+
+using namespace std;
+
+#include <iostream>
 #include <string>
+#include <chrono>
 
 using namespace std;
 
@@ -42,8 +50,9 @@ struct BinomialHeap
 
     bool isEmpty()
     {
-        return  (this->root == nullptr);
+        return (this->root == nullptr);
     }
+
     //merging trees with the same degree, where z has lesser key than y
     static void linkTrees(Node *y, Node *z)
     {
@@ -52,6 +61,7 @@ struct BinomialHeap
         z->child = y;
         z->degree = z->degree + 1;
     }
+
     //the whole point of this method is just adding a single node to the edge of this heap
     static Node *mergeTree(BinomialHeap *x, BinomialHeap *y)
     {
@@ -96,6 +106,7 @@ struct BinomialHeap
 
         return (res->sibling);
     }
+
     //we can see 4 cases while uniting
     void unionHeaps(BinomialHeap *bh)
     {
@@ -120,9 +131,7 @@ struct BinomialHeap
             {
                 prevX = x;
                 x = nextX;
-            }
-
-            else if (x->key <= nextX->key)
+            } else if (x->key <= nextX->key)
             {
                 x->sibling = nextX->sibling;
                 linkTrees(nextX, x);
@@ -156,7 +165,7 @@ struct BinomialHeap
         return this->min;
     }
 
-    Node *extractMin()
+    int extractMin()
     {
         Node *res = this->first();
 
@@ -189,14 +198,13 @@ struct BinomialHeap
         H->root = revChd;
         this->unionHeaps(H);
 
-        return res;
+        return res->key;
     }
 
     void decreaseKey(Node *x, int newKey)
     {
         // Precondition: x -> key > newKey
-        x->
-                key = newKey;
+        x->key = newKey;
         Node *y = x;
         Node *z = y->parent;
         while (z != nullptr && y->key < z->key)
@@ -213,28 +221,111 @@ struct BinomialHeap
             this->
                     min = y;
     }
+
+    void nodeDelete(Node *node)
+    {
+        decreaseKey(node, INT16_MIN);
+        extractMin();
+    }
 };
 
 
 int main()
 {
-    BinomialHeap *bh = new BinomialHeap();
+    BinomialHeap *test = new BinomialHeap;
 
-    bh->insert(new Node(3));
-    bh->insert(new Node(8));
-    bh->insert(new Node(4));
-
-    for (int i = 0; i < 10; ++i)
+    ifstream inputTEST;
+    inputTEST.open("C:\\Users\\Мансур\\CLionProjects\\SemesterProject\\Testin Data\\text.txt");
+    while (true)//reading
     {
-        int x = rand() % 100;
-        cout<<x<<" ";
-        bh->insert(new Node(x));
+        if (inputTEST.eof())
+            break;
+        long x;
+        inputTEST >> x;
+        test->insert(new Node(x));
+    }
+    inputTEST.close();
+
+    cout << "read";
+
+    ifstream input;
+    string str = "C:\\Users\\Мансур\\CLionProjects\\SemesterProject\\Testin Data\\Samples";
+    string txt = ".txt";
+
+    ofstream output;
+    string outputDir = "C:\\Users\\Мансур\\CLionProjects\\SemesterProject\\Results";
+    string fileSample = "\\TimeComplexityRes";
+
+    //time complexity measurements
+    for (int i = 0; i < 200; ++i)
+    {
+        cout<<i<<endl;
+        if(i==150)
+            int sdfsdaf= 1345;
+        inputTEST.open("C:\\Users\\Мансур\\CLionProjects\\SemesterProject\\Testin Data\\text.txt");
+        while (true)//reading
+        {
+            if (inputTEST.eof())
+                break;
+            long x;
+            inputTEST >> x;
+            test->insert(new Node(x));
+        }
+        inputTEST.close();
+        BinomialHeap *bh = new BinomialHeap;
+        input.open(str + to_string(i + 1) + txt);
+        output.open(outputDir + fileSample + to_string(i + 1) + txt);
+        auto start = std::chrono::high_resolution_clock::now();
+        while (true)//insert
+        {
+            if (input.eof())
+                break;
+            long x;
+            input >> x;
+            bh->insert(new Node(x));
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        output << "Insert: " << (end - start) / std::chrono::milliseconds(1) << endl;
+
+        //decrease key
+        Node *node = bh->root;
+        start = std::chrono::high_resolution_clock::now();
+        bh->decreaseKey(node, -1);
+        end = std::chrono::high_resolution_clock::now();
+        output << "Decrease key: " << (end - start) / std::chrono::milliseconds(1) << endl;
+
+        //delete
+
+        start = std::chrono::high_resolution_clock::now();
+        for (int j = 0; j <450; ++j)
+
+        {
+            node = bh->root;
+            bh->nodeDelete(node);
+        }
+        end = std::chrono::high_resolution_clock::now();
+        output << "Delete: " << (end - start) / std::chrono::milliseconds(1) << endl;
+
+        //union
+        start = std::chrono::high_resolution_clock::now();
+        bh->unionHeaps(test);
+        end = std::chrono::high_resolution_clock::now();
+        output << "Union: " << (end - start) / std::chrono::milliseconds(1) << endl;
+
+        //extract min
+        start = std::chrono::high_resolution_clock::now();
+        for (int j = 0; j < 450; ++j)
+        {
+            bh->extractMin();
+        }
+
+        end = std::chrono::high_resolution_clock::now();
+        output << "Extract min (first 200 nodes): " << (end - start) / std::chrono::milliseconds(1) << endl;
+
+        output.close();
+        input.close();
+        delete bh;
     }
 
-    cout<<endl;
-    while (!bh->isEmpty())
-    {
-        cout<<bh->extractMin()->key<<" ";
-    }
     return 0;
 }
