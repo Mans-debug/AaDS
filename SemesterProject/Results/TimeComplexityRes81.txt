@@ -1,0 +1,5 @@
+Insert: 280
+Decrease key: 0
+Delete: 1
+Union: 0
+Extract min (first 200 nodes): 0
