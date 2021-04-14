@@ -230,6 +230,7 @@ struct BinomialHeap
 };
 
 
+/*
 int main()
 {
     BinomialHeap *test = new BinomialHeap;
@@ -329,3 +330,4 @@ int main()
 
     return 0;
 }
+*/

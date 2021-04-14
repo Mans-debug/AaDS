@@ -3,4 +3,4 @@ project(SemesterProject)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(SemesterProject main.cpp)
+add_executable(SemesterProject main.cpp ProblemSolution.cpp)
