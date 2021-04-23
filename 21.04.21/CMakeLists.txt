@@ -3,4 +3,4 @@ project(21_04_21)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(21_04_21 ThirdTask.cpp)
+add_executable(21_04_21 main.cpp)

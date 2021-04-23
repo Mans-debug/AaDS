@@ -10,9 +10,9 @@ int binarySearch(int *arr, int left, int right, int num)
     if(num < arr[middle])
         return binarySearch(arr, left, middle, num);
 }
-int* borders(int *arr, int size, int num)
+string borders(int arr[21], int size, int num)
 {
-    int *res;
+    int res[] = {0, 0};
     int begin = binarySearch(arr, 0 , size - 1, num);
     int temp = begin;
     while (true)
@@ -30,5 +30,12 @@ int* borders(int *arr, int size, int num)
             break;
     }
     res[0] = temp;
-    return res;
+    string ret = to_string(res[0])+" " + to_string(res[1]);
+    return ret;
+}
+int main()
+{
+    int arr[] = {0,0,0,0,0,0,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3};
+    string res = borders(arr, 21, 1);
+    cout<<res;
 }
