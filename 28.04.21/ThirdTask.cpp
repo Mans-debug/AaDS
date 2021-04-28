@@ -10,6 +10,7 @@ int recursion(int m, int n)
 }
 int main()
 {
-    int x = recursion(4,4);
+    //WARNING: массив n = 3 X m = 3 считать как n = 3 - 1 X m = 3 - 1
+    int x = recursion(4,3);
     cout<<x;
 }
